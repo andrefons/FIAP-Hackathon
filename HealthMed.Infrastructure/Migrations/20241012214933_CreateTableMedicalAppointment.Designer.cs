@@ -3,6 +3,7 @@ using System;
 using HealthMed.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HealthMed.Infrastructure.Migrations
 {
     [DbContext(typeof(HealthMedDbContext))]
-    partial class HealthMedDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241012214933_CreateTableMedicalAppointment")]
+    partial class CreateTableMedicalAppointment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,7 +36,7 @@ namespace HealthMed.Infrastructure.Migrations
                     b.Property<long>("DoctorId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("PatientId")
+                    b.Property<long>("PacientId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("ScheduleId")
@@ -43,7 +46,7 @@ namespace HealthMed.Infrastructure.Migrations
 
                     b.HasIndex("DoctorId");
 
-                    b.HasIndex("PatientId");
+                    b.HasIndex("PacientId");
 
                     b.HasIndex("ScheduleId");
 
@@ -164,9 +167,9 @@ namespace HealthMed.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthMed.Domain.Entities.Person", "Patient")
+                    b.HasOne("HealthMed.Domain.Entities.Person", "Pacient")
                         .WithMany()
-                        .HasForeignKey("PatientId")
+                        .HasForeignKey("PacientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -178,7 +181,7 @@ namespace HealthMed.Infrastructure.Migrations
 
                     b.Navigation("Doctor");
 
-                    b.Navigation("Patient");
+                    b.Navigation("Pacient");
 
                     b.Navigation("Schedule");
                 });

@@ -14,6 +14,7 @@ namespace HealthMed.Infrastructure.Data
         public DbSet<Person> Persons { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<MedicalAppointment> MedicalAppointments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
             => modelBuilder.ApplyConfigurationsFromAssembly(typeof(HealthMedDbContext).Assembly);

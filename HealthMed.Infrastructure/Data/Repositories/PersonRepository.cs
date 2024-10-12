@@ -18,6 +18,14 @@ namespace HealthMed.Infrastructure.Data.Repositories
             _context = context;
         }
 
+        public async Task<Person> Get(long id)
+        {
+            var result = await _context.Persons
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
+        }
+
         public async Task<IEnumerable<Person>> GetAll()
         {
             var result = await _context.Persons
@@ -31,6 +39,14 @@ namespace HealthMed.Infrastructure.Data.Repositories
             var result = await _context.Persons
                 .Where(x => x.PersonType == personType)
                 .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<Person> GetDoctorById(long id)
+        {
+            var result = await _context.Persons
+                .FirstOrDefaultAsync(x => x.Id == id && x.PersonType == EPersonType.Doctor);
 
             return result;
         }

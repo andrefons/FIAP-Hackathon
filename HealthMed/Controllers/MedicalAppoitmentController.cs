@@ -20,6 +20,15 @@ namespace HealthMed.Controllers
 
             if (result is null) return BadRequest();
 
+            return Created();
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(long id)
+        {
+            var result = await _appService.Get(id);
+
+            if (result is null) return NotFound();
+
             return Ok(result);
         }
     }

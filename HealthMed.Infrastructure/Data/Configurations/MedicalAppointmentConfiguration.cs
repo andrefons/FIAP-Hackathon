@@ -21,9 +21,9 @@ namespace HealthMed.Infrastructure.Data.Configurations
             builder.HasOne(x => x.Doctor)
                 .WithMany()
                 .HasForeignKey(x => x.DoctorId);
-            builder.HasOne(x => x.Pacient)
+            builder.HasOne(x => x.Patient)
                 .WithMany()
-                .HasForeignKey(x => x.PacientId);
+                .HasForeignKey(x => x.PatientId);
         }
     }
 }

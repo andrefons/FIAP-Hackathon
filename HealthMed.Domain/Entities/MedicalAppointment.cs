@@ -6,7 +6,7 @@
         public Schedule Schedule { get; set; }
         public long DoctorId { get; set; }
         public Person Doctor { get; set; }
-        public long PacientId { get; set; }
-        public Person Pacient { get; set; }
+        public long PatientId { get; set; }
+        public Person Patient { get; set; }
     }
 }

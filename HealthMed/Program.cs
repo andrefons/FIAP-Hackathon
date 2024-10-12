@@ -23,9 +23,11 @@ builder.Services.AddScoped<IAuthenticationAppService, AuthenticationAppService>(
 builder.Services.AddScoped<IUserAppService, UserAppService>();
 builder.Services.AddScoped<IDoctorAppService, DoctorAppService>();
 builder.Services.AddScoped<IScheduleAppService, ScheduleAppService>();
+builder.Services.AddScoped<IMedicalAppointmentAppService, MedicalAppointmentAppService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<IScheduleRepository, ScheduleRepository>();
+builder.Services.AddScoped<IMedicalAppointmentRepository, MedicalAppointmentRepository>();
 
 builder.Services.Configure<EmailSettings>(configuration.GetSection(nameof(EmailSettings)));
 builder.Services.AddSingleton<IEmailService, EmailService>();
