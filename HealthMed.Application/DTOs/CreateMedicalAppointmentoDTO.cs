@@ -4,6 +4,6 @@ namespace HealthMed.Application.DTOs
     {
         public long ScheduleId { get; set; }
         public long DoctorId { get; set; }
-        public long PacientId { get; set; }
+        public long PatientId { get; set; }
     }
 }

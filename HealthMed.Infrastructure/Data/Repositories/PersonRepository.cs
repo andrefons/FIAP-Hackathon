@@ -50,6 +50,13 @@ namespace HealthMed.Infrastructure.Data.Repositories
 
             return result;
         }
+        public async Task<Person> GetPatientById(long id)
+        {
+            var result = await _context.Persons
+                .FirstOrDefaultAsync(x => x.Id == id && x.PersonType == EPersonType.Patient);
+
+            return result;
+        }
 
         public async Task<Person> Insert(Person person)
         {

@@ -16,5 +16,6 @@ namespace HealthMed.Domain.Interfaces
         Task<IEnumerable<Person>> GetAll();
         Task<IEnumerable<Person>> GetAllByPersonType(EPersonType personType);
         Task<Person> GetDoctorById(long id);
+        Task<Person> GetPatientById(long id);
     }
 }

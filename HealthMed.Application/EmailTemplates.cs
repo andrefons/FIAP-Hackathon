@@ -8,19 +8,23 @@ namespace HealthMed.Application
 {
     public static class EmailTemplates
     {
-        public static string GetConfirmEngagementEmail(string clientName, string approvedLink)
+        public static string GetNewMedicalAppointmentEmail(
+            string doctorName, string patientName, DateTime scheduleDate)
         {
-            return ConfirmEngagementEmail.Replace("{{ClientName}}", clientName)
-                                         .Replace("{{ApprovedLink}}", approvedLink);
+            return NewMedicalAppointmentEmail
+            .Replace("{{DoctorName}}", doctorName)
+            .Replace("{{PatientName}}", patientName)
+            .Replace("{{ScheduleDate}}", scheduleDate.ToString("dd/MM/yyyy"))
+            .Replace("{{ScheduleTime}}", scheduleDate.ToString("hh:mm"));
         }
 
-        private const string ConfirmEngagementEmail = """
+        private const string NewMedicalAppointmentEmail = """
         <!DOCTYPE html>
         <html lang="en">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Confirm Your Engagement</title>
+            <title>Health&Med - Nova consulta agendada</title>
             <style>
                 body {
                     font-family: 'Arial', sans-serif;
@@ -80,17 +84,11 @@ namespace HealthMed.Application
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>Confirm Your Engagement</h1>
+                    <h1>Olá, Dr. {{DoctorName}}!</h1>
                 </div>
                 <div class="content">
-                    <p>Dear {{ClientName}},</p>
-                    <p>Thank you for your comment on our article. To ensure that your comment is genuine, we require you to confirm your engagement by clicking the button below.</p>
-                    <p><a href="{{ApprovedLink}}" class="btn">Confirm Comment</a></p>
-                    <p>If you did not make this comment, you can safely ignore this email.</p>
-                    <p>Thank you,<br>The Team</p>
-                </div>
-                <div class="footer">
-                    <p>&copy; 2024 Your Company. All rights reserved.</p>
+                    <p>Você tem uma nova consulta marcada! Paciente: {{PatientName}}.</p>
+                    <p>Data e horário: {{ScheduleDate}} às {{ScheduleTime}}.</p>
                 </div>
             </div>
         </body>
