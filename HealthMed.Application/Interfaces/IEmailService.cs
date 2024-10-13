@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthMed.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace HealthMed.Application.Interfaces
 {
     public interface IEmailService
     {
-        Task SendAsync(string email, string subject, string content);
+        Task<Result> SendAsync(string email, string subject, string content);
     }
 }

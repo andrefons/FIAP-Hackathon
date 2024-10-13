@@ -19,7 +19,7 @@ namespace HealthMed.Controllers
         {
             var result = await _appService.Create(dto);
 
-            if (result is null) return BadRequest();
+            if (!result.Success) return BadRequest(result.ErrorMessages);
 
             return Ok(result);
         }

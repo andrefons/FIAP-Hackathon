@@ -19,7 +19,7 @@ namespace HealthMed.Controllers
         {
             var result = await _appService.Login(dto.UserName, dto.Password);
 
-            if(result is null) return Unauthorized();
+            if(!result.Success) return Unauthorized();
 
             return Ok(result);
         }

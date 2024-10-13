@@ -1,14 +1,15 @@
 ﻿using HealthMed.Application.DTOs;
 using HealthMed.Domain.Entities;
+using HealthMed.Shared;
 
 namespace HealthMed.Application.Interfaces
 {
     public interface IScheduleAppService
     {
-        Task<Schedule> Create(CreateScheduleDTO dto);
-        Task Update(UpdateScheduleDTO dto);
-        Task Delete(long id);
-        Task<IEnumerable<ScheduleDTO>> GetAllByDoctorId(long doctorId);
-        Task<IEnumerable<ScheduleDTO>> GetAllAvailablesByDoctorId(long doctorId);
+        Task<Result<Schedule>> Create(CreateScheduleDTO dto);
+        Task<Result> Update(UpdateScheduleDTO dto);
+        Task<Result> Delete(long id);
+        Task<Result<IEnumerable<ScheduleDTO>>> GetAllByDoctorId(long doctorId);
+        Task<Result<IEnumerable<ScheduleDTO>>> GetAllAvailablesByDoctorId(long doctorId);
     }
 }

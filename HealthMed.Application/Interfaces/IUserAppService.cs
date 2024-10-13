@@ -1,5 +1,6 @@
 ﻿using HealthMed.Application.DTOs;
 using HealthMed.Domain.Entities;
+using HealthMed.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace HealthMed.Application.Interfaces
 {
     public interface IUserAppService
     {
-        Task<User> Create(CreateUserDTO dto);
+        Task<Result<User>> Create(CreateUserDTO dto);
     }
 }

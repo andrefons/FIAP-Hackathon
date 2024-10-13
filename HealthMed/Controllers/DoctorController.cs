@@ -21,7 +21,7 @@ namespace HealthMed.Controllers
         {
             var result = await _appService.GetAll();
 
-            if (result is null) return BadRequest();
+            if (!result.Success) return BadRequest(result.ErrorMessages);
 
             return Ok(result);
         }
@@ -29,7 +29,7 @@ namespace HealthMed.Controllers
         public async Task<IActionResult> GetAll(){
             var result = await _appService.GetAll();
 
-            if (result is null) return NotFound();
+            if (!result.Success) return NotFound();
 
             return Ok(result);
         }
@@ -38,7 +38,7 @@ namespace HealthMed.Controllers
         {
             var result = await _scheduleAppService.GetAllByDoctorId(id);
 
-            if (result is null) return NotFound();
+            if (!result.Success) return NotFound();
 
             return Ok(result);
         }
@@ -47,7 +47,7 @@ namespace HealthMed.Controllers
         {
             var result = await _scheduleAppService.GetAllAvailablesByDoctorId(id);
 
-            if (result is null) return NotFound();
+            if (!result.Success) return NotFound();
 
             return Ok(result);
         }

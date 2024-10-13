@@ -1,6 +1,7 @@
 ﻿using HealthMed.Application.DTOs;
 using HealthMed.Application.Interfaces;
 using HealthMed.Domain.Interfaces;
+using HealthMed.Shared;
 using Microsoft.Extensions.Configuration;
 
 namespace HealthMed.Application.Services
@@ -14,17 +15,18 @@ namespace HealthMed.Application.Services
             _config = config;
             _personRepository = personRepository;
         }
-        public async Task<IEnumerable<DoctorDTO>> GetAll()
+        public async Task<Result<IEnumerable<DoctorDTO>>> GetAll()
         {
             var result = await _personRepository
                 .GetAllByPersonType(Domain.Enums.EPersonType.Doctor);
 
-            return result?.Select(x => new DoctorDTO
-            {
-                Id = x.Id,
-                Name = x.Name,
-                CRM = x.CRM,
-            });
+            return new Result<IEnumerable<DoctorDTO>>(
+                result?.Select(x => new DoctorDTO
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    CRM = x.CRM,
+                }));
         }
     }
 }

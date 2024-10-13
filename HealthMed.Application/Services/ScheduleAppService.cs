@@ -2,6 +2,7 @@
 using HealthMed.Application.Interfaces;
 using HealthMed.Domain.Entities;
 using HealthMed.Domain.Interfaces;
+using HealthMed.Shared;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace HealthMed.Application.Services
             _config = config;
             _scheduleRepository = scheduleRepository;
         }
-        public async Task<Schedule> Create(CreateScheduleDTO dto)
+        public async Task<Result<Schedule>> Create(CreateScheduleDTO dto)
         {
             var schedule = new Schedule()
             {
@@ -30,42 +31,45 @@ namespace HealthMed.Application.Services
 
             var scheduleAlreadyExistis = await _scheduleRepository.CheckIfAlreadyExists(schedule);
 
-            if (scheduleAlreadyExistis) return null;
+            if (scheduleAlreadyExistis) return new Result<Schedule>().AddErrorMessage("Schedule already exists.");
 
             await _scheduleRepository.Insert(schedule);
 
-            return schedule;
+            return new Result<Schedule>(
+                schedule);
         }
 
-        public Task Delete(long id)
+        public Task<Result> Delete(long id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<ScheduleDTO>> GetAllByDoctorId(long doctorId)
+        public async Task<Result<IEnumerable<ScheduleDTO>>> GetAllByDoctorId(long doctorId)
         {
             var result = await _scheduleRepository.GetAllByDoctorId(doctorId);
 
-            return result?.Select(x => new ScheduleDTO
-            {
-                Id = x.Id,
-                Date = x.Date,
-                DoctorId = x.DoctorId,
-            });
+            return new Result<IEnumerable<ScheduleDTO>>(
+                result?.Select(x => new ScheduleDTO
+                {
+                    Id = x.Id,
+                    Date = x.Date,
+                    DoctorId = x.DoctorId,
+                }));
         }
-        public async Task<IEnumerable<ScheduleDTO>> GetAllAvailablesByDoctorId(long doctorId)
+        public async Task<Result<IEnumerable<ScheduleDTO>>> GetAllAvailablesByDoctorId(long doctorId)
         {
             var result = await _scheduleRepository.GetAllAvailablesByDoctorId(doctorId);
 
-            return result?.Select(x => new ScheduleDTO
-            {
-                Id = x.Id,
-                Date = x.Date,
-                DoctorId = x.DoctorId,
-            });
+            return new Result<IEnumerable<ScheduleDTO>>(
+                result?.Select(x => new ScheduleDTO
+                {
+                    Id = x.Id,
+                    Date = x.Date,
+                    DoctorId = x.DoctorId,
+                }));
         }
 
-        public Task Update(UpdateScheduleDTO dto)
+        public Task<Result> Update(UpdateScheduleDTO dto)
         {
             throw new NotImplementedException();
         }

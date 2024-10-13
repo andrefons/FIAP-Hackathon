@@ -2,6 +2,7 @@
 using HealthMed.Application.Interfaces;
 using HealthMed.Domain.Entities;
 using HealthMed.Domain.Interfaces;
+using HealthMed.Shared;
 using HealthMed.Shared.Cryptography;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -24,7 +25,7 @@ namespace HealthMed.Application.Services
             _config = config;
             _userRepository = userRepository;
         }
-        public async Task<TokenDTO> Login(string username, string password)
+        public async Task<Result<TokenDTO>> Login(string username, string password)
         {
             var passwordHash = PasswordHasher.HashSHA256(password);
 
@@ -33,11 +34,12 @@ namespace HealthMed.Application.Services
             if (user == null)
                 return null;
 
-            return new TokenDTO
-            {
-                PersonName = user.Person.Name,
-                Token = GenerateToken(user),
-            };
+            return new Result<TokenDTO>(
+                new TokenDTO
+                {
+                    PersonName = user.Person.Name,
+                    Token = GenerateToken(user),
+                });
         }
         private string GenerateToken(User user)
         {

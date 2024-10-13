@@ -18,7 +18,7 @@ namespace HealthMed.Controllers
         {
             var result = await _appService.Create(dto);
 
-            if (result is null) return BadRequest();
+            if (!result.Success) return BadRequest(result.ErrorMessages);
 
             return Created();
         }
@@ -27,7 +27,7 @@ namespace HealthMed.Controllers
         {
             var result = await _appService.Get(id);
 
-            if (result is null) return NotFound();
+            if (!result.Success) return NotFound();
 
             return Ok(result);
         }
