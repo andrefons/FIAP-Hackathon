@@ -32,7 +32,7 @@ namespace HealthMed.Application.Services
             var user = await _userRepository.GetUserByLogin(username, passwordHash);
 
             if (user == null)
-                return null;
+                return new Result<TokenDTO>().AddErrorMessage("Invalid username or password.");
 
             return new Result<TokenDTO>(
                 new TokenDTO
