@@ -36,7 +36,7 @@ namespace HealthMed.Application.Services
 
             var schedule = await _scheduleRepository.Get(dto.ScheduleId);
 
-            if (schedule is null || !schedule.Available) return new Result<MedicalAppointment>().AddErrorMessage("Invalid schedule.");
+            if (schedule is null || !schedule.Available) return new Result<MedicalAppointment>().AddErrorMessage("Appointment date unavailable.");
 
             var medicalAppointment = await _repository.Insert(new MedicalAppointment
             {
