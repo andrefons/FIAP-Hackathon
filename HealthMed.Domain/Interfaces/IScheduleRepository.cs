@@ -15,6 +15,6 @@ namespace HealthMed.Domain.Interfaces
         Task<Schedule> Get(long id);
         Task<IEnumerable<Schedule>> GetAllByDoctorId(long doctorId);
         Task<IEnumerable<Schedule>> GetAllAvailablesByDoctorId(long doctorId);
-        Task<bool> CheckIfAlreadyExists(Schedule schedule);
+        Task<bool> CheckIfAlreadyExists(long doctorId, DateTime scheduleDate);
     }
 }

@@ -62,10 +62,10 @@ namespace HealthMed.Infrastructure.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> CheckIfAlreadyExists(Schedule schedule)
+        public async Task<bool> CheckIfAlreadyExists(long doctorId, DateTime date)
         {
             var result = await _context.Schedules
-                .AnyAsync(x => x.DoctorId == schedule.DoctorId && x.Date == schedule.Date);
+                .AnyAsync(x => x.DoctorId == doctorId && x.Date == date);
 
             return result;
         }

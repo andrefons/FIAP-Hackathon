@@ -29,7 +29,7 @@ namespace HealthMed.Application.Services
                 Date = dto.Date,
             };
 
-            var scheduleAlreadyExistis = await _scheduleRepository.CheckIfAlreadyExists(schedule);
+            var scheduleAlreadyExistis = await _scheduleRepository.CheckIfAlreadyExists(schedule.DoctorId, schedule.Date);
 
             if (scheduleAlreadyExistis) return new Result<Schedule>().AddErrorMessage("Schedule already exists.");
 
