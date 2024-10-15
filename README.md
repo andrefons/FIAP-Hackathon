@@ -1,65 +1,81 @@
 # FIAP - HACKATHON
-## API de Hospital
+## API de Agendamento de Consultas Médicas
 
-Esta é uma API para gerenciamento de hospital desenvolvida em C# utilizando o framework .NET. A API fornece endpoints para realizar operações relacionadas a usuários, ativos financeiros, portfólios e ordens de investimento.
+Esta é uma API para o agendamento de consultas médicas desenvolvida em C# utilizando o framework .NET. A API fornece endpoints para realizar operações relacionadas a usuários, agenda médica e agendamentos de consulta.
 
 ## Configuração do Ambiente
 
 1. **Pré-requisitos:**
-   - [.NET SDK](https://dotnet.microsoft.com/download)
-   - [SQL Server](https://www.microsoft.com/sql-server/)
+   - [.NET SDK](https://dotnet.microsoft.com/download/)
+   - [Postgres](https://www.postgresql.org/download/)
 
 2. **Configuração do Banco de Dados:**
+   - Execute a migration para a criação das tabelas no banco de dados com o comando abaixo:
+   
+   Visual Studio
+   ```bash
+   Update-Database
+
+   CLI do .NET
+   ```bash
+   dotnet ef database update
+
    - Execute os scripts de criação de tabelas localizados em `DatabaseScripts` no seu servidor SQL Server.
 
 3. **Configuração da Aplicação:**
    - Abra o arquivo `appsettings.json` e atualize a string de conexão com o banco de dados.
+   -- Sugestão: Utilizar o [Supabase] (https://supabase.com/), para hospedagem do banco de dados.
+   - Alterar as configurações do SMTP
+   -- Sugestão: Utilizar o [Sendgrip] (https://sendgrid.com/en-us), para envio do e-mails.
 
 ## Como Executar a Aplicação
 
 1. Navegue até o diretório raiz da aplicação no terminal.
 
-2. Execute o seguinte comando para compilar e executar a aplicação:
+2. Execute o seguinte comando para restaurar as dependências, compilar e executar a aplicação:
+
    ```bash
    dotnet run
-3.Acesse a API em `http://localhost:5000` no seu navegador ou através de ferramentas como o Postman.
+
+3.Acesse a API em `http://localhost:5258` no seu navegador ou através de ferramentas como o Postman.
 
 ## Documentação da API
-A documentação da API está disponível no endpoint /swagger. Acesse `http://localhost:5000/swagger` para explorar os endpoints e testar as operações.
+A documentação da API está disponível no endpoint /swagger. Acesse `http://localhost:5258/swagger` para explorar os endpoints e testar as operações.
 
 **Endpoints Principais**
+- Autenticação
+
+  - `POST /login: Login do usuário no sistema.`
+
 - Usuários:
 
-  - `GET /api/user/profile: Recuperação do perfil do usuário.`
-  - `PUT /api/user/profile: Atualização do perfil do usuário.`
+  - `POST /api/user: Criação de usuários.`
 
-- Portfólio:
+- Agendas:
 
-  - `GET /api/portfolio: Recuperação do portfólio do usuário.`
-  - `POST /api/portfolio: Adição de um novo ativo ao portfólio.`
-  - `DELETE /api/portfolio/{portfolioId}: Remoção de um ativo do portfólio.`
+  - `POST /api/schedule: Criação de agenda para atendimento.`
+  - `GET /api/doctor/{id}/schedule: Lista toda a agenda do médico.`
+  - `GET /api/doctor/{id}/avaliable-schedule: Lista somente a agenda disponível do médico.`
 
-- Ativos Financeiros:
+- Médicos:
 
-  - `GET /api/assets: Recuperação da lista de ativos disponíveis.`
-  - `GET /api/assets/{symbol}: Recuperação de detalhes de um ativo específico.`
+  - `GET /api/doctor: Lista todos os médicos disponíveis.`
 
-- Ordens de Investimento:
+- Consultas:
+
+  - `POST /api/medicalAppointment: Criação de agendamento.`
+  - `GET /api/medicalAppointment/{id}: Consulta um agendamento específico.`
   
-  - `GET /api/orders: Recuperação da lista de ordens de investimento do usuário.`
-  - `POST /api/orders: Criação de uma nova ordem de investimento.`
-  - `DELETE /api/orders/{orderId}: Cancelamento de uma ordem de investimento.`
-    
 Para mais detalhes sobre os endpoints e seus parâmetros, consulte a documentação da API.
 
 ## Contribuição
 Contribuições são bem-vindas! Antes de contribuir, abra uma issue para discutir as mudanças propostas.
 
 ## Nome dos participantes
-Janderson Campelô - RM352814
-Gustavo Kazuo - RM352485
-Cleyber Silva - RM353086
 André Fonseca -  RM353003
+Cleyber Silva - RM353086
+Gustavo Kazuo - RM352485
+Janderson Campelô - RM352814
 
 ## Licença
 Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para detalhes.

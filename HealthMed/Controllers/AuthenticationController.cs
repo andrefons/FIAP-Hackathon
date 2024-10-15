@@ -14,7 +14,7 @@ namespace HealthMed.Controllers
         {
             _appService = appService;
         }
-        [HttpPost]
+        [HttpPost("/login")]
         public async Task<IActionResult> Login(LoginDTO dto)
         {
             var result = await _appService.Login(dto.UserName, dto.Password);
