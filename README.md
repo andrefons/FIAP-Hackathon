@@ -7,7 +7,7 @@ Esta é uma API para o agendamento de consultas médicas desenvolvida em C# util
 
 1. **Pré-requisitos:**
    - [.NET SDK](https://dotnet.microsoft.com/download/)
-   - [Postgres](https://www.postgresql.org/download/)
+   - [PostgreSQL](https://www.postgresql.org/download/)
 
 2. **Configuração do Banco de Dados:**
    - Execute a migration para a criação das tabelas no banco de dados com o comando abaixo:
