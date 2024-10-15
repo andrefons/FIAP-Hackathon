@@ -12,21 +12,23 @@ Esta é uma API para o agendamento de consultas médicas desenvolvida em C# util
 2. **Configuração do Banco de Dados:**
    - Execute a migration para a criação das tabelas no banco de dados com o comando abaixo:
    
-   Visual Studio
-   ```bash
-   Update-Database
+      Visual Studio
+            
+      ```bash
+      update-database
+      ```
+   
+      CLI do .NET
+            
+      ```bash
+      dotnet ef database update
+      ```
 
-   CLI do .NET
-   ```bash
-   dotnet ef database update
-
-   - Execute os scripts de criação de tabelas localizados em `DatabaseScripts` no seu servidor SQL Server.
-
-3. **Configuração da Aplicação:**
+4. **Configuração da Aplicação:**
    - Abra o arquivo `appsettings.json` e atualize a string de conexão com o banco de dados.
-   -- Sugestão: Utilizar o [Supabase] (https://supabase.com/), para hospedagem do banco de dados.
+   **Sugestão: Utilizar o [Supabase](https://supabase.com/), para hospedagem do banco de dados.**
    - Alterar as configurações do SMTP
-   -- Sugestão: Utilizar o [Sendgrip] (https://sendgrid.com/en-us), para envio do e-mails.
+   **Sugestão: Utilizar o [Sendgrip](https://sendgrid.com/en-us), para envio do e-mails.**
 
 ## Como Executar a Aplicação
 
@@ -36,8 +38,9 @@ Esta é uma API para o agendamento de consultas médicas desenvolvida em C# util
 
    ```bash
    dotnet run
+   ```
 
-3.Acesse a API em `http://localhost:5258` no seu navegador ou através de ferramentas como o Postman.
+3. Acesse a API em `http://localhost:5258` no seu navegador ou através de ferramentas como o Postman.
 
 ## Documentação da API
 A documentação da API está disponível no endpoint /swagger. Acesse `http://localhost:5258/swagger` para explorar os endpoints e testar as operações.
